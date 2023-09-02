@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+var req;
+
+function RequesttoServlet()
+{
+	if(window.XMLHttpRequest)
+		req = new XMLHttpRequest();
+	else
+		req = new ActiveXObject("Microsoft.XMLHttp");
+	
+	//monitoring the status - function - call
+	
+	req.onreadystatechange = getResponse;
+	
+	var url = "GetStudentServlet?course="+f1.course.value;
+	
+	req.open("GET", url, true);
+	req.send();
+}
+
+function getResponse()
+{
+	alert("test");
+	if(req.readyState==4)
+		{
+		alert("test1");
+		if(req.status==200)
+			{
+			alert("test2");
+			//document.getElementById("rno").value=req.responseText;
+			document.getElementById("studName").innerHTML=req.responseText;
+			
+			}
+		}
+}
+
+</script>
+</head>
+<body>
+<h3>Ajax Learning</h3>
+
+<form name="f1">
+Course : <input type="text" id="course"/>
+<br>
+<input type="button" value="Get Response" onClick="RequesttoServlet()"/> 
+<div id = "studName"></div>
+</form>
+
+</body>
+</html>
